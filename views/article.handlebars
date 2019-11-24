@@ -1,0 +1,46 @@
+<div class="row">
+    <h4 class="card">
+        {{article.title}}
+    </h4>
+    <h6 class="card-body">
+        {{body}}
+    </h6>
+</div>
+<div class="row">
+    <div class="col-md-6">
+    </div>
+    <form>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control" placeholder="First name">
+            </div>
+            <div class="col">
+                <input type="text" class="form-control" placeholder="Last name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group">
+                <label for="leave-comment">
+                    Leave your thoughts on the article.
+                </label>
+                <textarea class="form-control" id="leave-comment" rows="3">
+            </textarea>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col">
+        <h6>Comments:</h6>
+        {{#if article.comment}}
+        {{#each article,comment}}
+        <div class="col">
+            <p id="so-far">{{name}}</p>
+            <p>{{body}}</p>
+        </div>
+        {{/each}}
+        {{else}}
+        <p>No comments have been left</p>
+        {{/if}}
+    </div>
+</div>
