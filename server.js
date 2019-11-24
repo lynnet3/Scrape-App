@@ -1,5 +1,7 @@
 var express = require("express");
 var mongoose = require("mongoose");
+var exphbs = require("express-handlebars");
+var logger = require("morgan")
 
 var axios = require("axios");
 var cheerio = require("cheerio");
@@ -13,37 +15,21 @@ app.use(express.urlencoded({
     extended: true
 }));
 app.use(express.json());
-app.use(express.static("public"));
+app.use(express.static("/public"));
 
 mongoose.connect("mongodb://localhost/scrape-app", {
     useNewUrlParser: true
 });
 
-app.get("/scrape", function (req, res) {
-    axios.get("some website").then(function (response) {
-        var $ = cheerio.load(response.data);
+app.engine(
+    "handlebars",
+    exphbs({
+        defaultLayout: "main"
+    })
+);
 
-        $("the thing to grab").each(function (i, element) {
-            var result = {};
+app.set("view engin", "handlebars");
 
-            result.title = $(this)
-                .children("a")
-                .text();
-            result.link = $(this)
-                .children("a")
-                .attr("href");
-            db.Article.create(result)
-            .then(function(dbArticle){
-                console.log(dbArticle);
-            })
-            .catch(function(err){
-                console.log(err);
-            });
-        });
-        res.send("The Scrape is Complete");
-    });
+app.listen(PORT, function(){
+    console.log("Ready to run on " + PORT)
 });
-
-app.get("/articles", function(req, res){
-    
-})
