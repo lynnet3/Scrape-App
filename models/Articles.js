@@ -14,8 +14,9 @@ var ArticleSchema = new Schema({
 
     note:{
         type: Schema.Types.ObjectId,
-        ref: "Note"
+        ref: "Comment"
     }
 });
 
 var Article = mongoose.model("Article", ArticleSchema);
+module.exports = Article;
