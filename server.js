@@ -51,16 +51,50 @@ app.get("/scrape", function (req, res) {
         res.send("The scrape is done");
         });
 });
-app.engine(
-    "handlebars",
-    exphbs({
-        defaultLayout: "main"
+
+app.get("/articles", function(req, res){
+    db.Article.find({})
+    .then(function(dbArticle){
+        res.json(dbArticle);
     })
-);
+    .catch(function(err){
+        res.json(err);
+    });
+});
 
-app.set("view engin", "handlebars");
+app.get("/articles/:id", function(req, res){
+    db.Article.findOne({_id: req.perams.id})
+    .populate("comment")
+    .then(function(dbArticle){
+        res.json(dbArticle);
+    })
+    .catch(function(err){
+        res.json(err);
+    });
+});
 
-require("./controller/controller")(app);
+app.post("/articles/:id", function(req, res){
+    db.Ccomment.create(req.body)
+    .then(function(dbComment){
+        return db.Article.findOneAndUpdate({_id: req.perams.id}, {comment: dbComment._id}, {new: true});
+    })
+    .then(function(dbArticle){
+        res.json(dbArticle);
+    })
+    .catch(function(err){
+        res.json(err);
+    });
+});
+// app.engine(
+//     "handlebars",
+//     exphbs({
+//         defaultLayout: "main"
+//     })
+// );
+
+// app.set("view engin", "handlebars");
+
+//require("./controller/controller")(app);
 app.listen(PORT, function () {
     console.log("Ready to run on " + PORT)
 });
