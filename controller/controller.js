@@ -1,18 +1,17 @@
 var express = require("express");
-var router = express.Router();
+//var router = express.Router();
 var axios = require("axios");
 var path = require("path");
 var cheerio = require("cheerio");
-//var request = require("request");
+var mongoose = require("mongoose");
+var db = require("../models")
 
-var Comment = require("../models/Comments");
-var Article = require("../models/Articles");
 
 router.get("/scrape", function( req, res){
     axios.get("https://www.theonion.com/")
     .then (function(response){
         var $ = cheerio.load(response.data);
-        $("s").each(function(i, element){
+        $("content-meta__headline__wrapper sc174gvm-0 eYcrcn").each(function(i, element){
             var result ={};
 
             result.title=$(this)
