@@ -20,7 +20,9 @@ app.use(express.urlencoded({
 app.use(express.json());
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/scrape-app", {
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scrape-app";
+
+mongoose.connect(MONGODB_URI, {
     useNewUrlParser: true
 });
 
@@ -96,5 +98,5 @@ app.post("/articles/:id", function(req, res){
 
 //require("./controller/controller")(app);
 app.listen(PORT, function () {
-    console.log("Ready to run on " + PORT)
+    console.log("Ready to run on localhost:"+PORT)
 });

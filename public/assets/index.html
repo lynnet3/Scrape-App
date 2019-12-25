@@ -1,26 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
     <title>Scrape The Onion</title>
+    <style>
+    body{background-color: darkgrey;}
+    #wrapper{
+        widows: 960px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 5%;
+    }
+    #articles{
+        display: inline-block;
+        overflow: auto;
+        width: 60%;
+        height: 700px;
+    }
+    #comment{
+        float: right;
+        width: 30%;
+    }
+    textarea,input{
+        display: block;
+        width: 100%;
+        background-color: floralwhite;
+    }
+    input{
+        height: 40px;
+        font-size: 24px;
+    }
+    textarea{
+        height: 200px;
+        font-size: 18px;
+    }
+    </style>
 </head>
-
 <body>
-
-    {{>nav/navbar}}
-
-    <main>
-        <div class="container">
-            {{{body}}}
-        </div>
-    </main>
-
-    {{>footer}}
-    
+    <div id="wrapper">
+        <h2>Scrape The Onion</h2>
+        <h3>Let's see the latest news on The Onion. Cause we all need a little laugh</h3>
+        <div id="articles"></div>
+        <div id="comment"></div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.js"
         integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
@@ -29,7 +53,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-
+    <script src="app.js"></script>
 </body>
-
 </html>
