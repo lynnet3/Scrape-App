@@ -26,12 +26,17 @@ var cheerio = require("cheerio");
 //     useNewUrlParser: true
 // });
 
+console.log("\n***********************************\n" +
+            "Let's see what in in the \n" +
+            "news from the NY Post:" +
+            "\n***********************************\n");
+
 //app.get("/scrape", function (req, res) {
     axios.get("https://nypost.com.tag/free-press").then(function(response){
 
     var $ = cheerio.load(response.data);
 
-    var result = [];
+    var results = [];
     
     $("h3.entry-heading").each(function (i, element) {
             
@@ -52,7 +57,7 @@ var cheerio = require("cheerio");
             //         console.log(err);
             //     });
 
-            result.push({
+            results.push({
                 title:title,
                 link:link
             })
